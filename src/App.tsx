@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { addDays, AS_OF_DATE, getFields, getReadings, getStations } from './api/mockApi'
-import { fieldAtRiskofFrost } from './frostMonitoring'
+import { addDays, AS_OF_DATE, getFields, getReadings, getStations, type Field } from './api/mockApi'
+import { summarizeFieldFrost } from './frostMonitoring'
 import './App.css'
 
-type FieldStatus = { id: string; name: string; atRisk: boolean }
+type FieldStatus = Field & ReturnType<typeof summarizeFieldFrost>
 
 function App() {
   const [fields, setFields] = useState<FieldStatus[] | null>(null)
@@ -23,9 +23,8 @@ function App() {
         if (ignore) return
 
         const statuses = fields.map((field) => ({
-          id: field.id,
-          name: field.name,
-          atRisk: fieldAtRiskofFrost(field, stations, readings),
+          ...field,
+          ...summarizeFieldFrost(field, stations, readings),
         }))
         setFields(statuses.sort((a, b) => Number(b.atRisk) - Number(a.atRisk)))
       } catch {
@@ -62,10 +61,17 @@ function App() {
         <ul className="field-list" role="list">
           {fields.map((field) => (
             <li className="field-row" key={field.id}>
-              <strong>{field.name}</strong>
-              <span className={field.atRisk ? 'risk-label at-risk' : 'risk-label'}>
-                {field.atRisk ? 'At risk' : 'No frost detected'}
-              </span>
+              <div className="field-heading">
+                <h2>{field.name}</h2>
+                {field.atRisk && <span className="risk-label at-risk">At risk of frost</span>}
+              </div>
+              <dl className="field-details">
+                <div><dt>Crop</dt><dd>{field.crop}</dd></div>
+                <div>
+                  <dt>Coldest daily low (last 7 days)</dt>
+                  <dd>{field.coldestLow === null ? 'No readings' : `${field.coldestLow} °C`}</dd>
+                </div>
+              </dl>
             </li>
           ))}
         </ul>
