@@ -2,12 +2,12 @@ import {addDays, AS_OF_DATE, type Field, type Station, type Reading} from './api
 
 
 // Risk if any of its stations recorded a daily low of 0 °C or below in the last 7
-// days.
+// days, or if there are no valid readings in that window.
 
 
 // Requires: Stations and readings have already been fetched.
 // Modifies: nothing
-// Effects: Returns true if the field is at risk of frost. False otherwise
+// Effects: Returns true for frost risk or no valid readings. False otherwise
 export function fieldAtRiskofFrost(field:Field, stations:readonly Station[], readings:readonly Reading[]):boolean{
     return summarizeFieldFrost(field, stations, readings).atRisk
 }
@@ -16,7 +16,7 @@ export function fieldAtRiskofFrost(field:Field, stations:readonly Station[], rea
 // Modifies: nothing
 // Effects: Returns the coldest reported low among the field's stations in the
 // seven days ending on AS_OF_DATE, inclusive. Missing temperatures are skipped.
-// If there are no valid readings, coldestLow is null and atRisk is false.
+// If there are no valid readings, coldestLow is null and atRisk is true.
 // Otherwise, atRisk is true when coldestLow is 0 °C or below.
 export function summarizeFieldFrost(field:Field, stations:readonly Station[], readings:readonly Reading[]){
     const stationIds = new Set(stations.filter(station => station.fieldId === field.id).map(station => station.id))
@@ -28,5 +28,5 @@ export function summarizeFieldFrost(field:Field, stations:readonly Station[], re
         coldestLow = coldestLow === null ? lowTempC : Math.min(coldestLow, lowTempC)
     }
 
-    return { coldestLow, atRisk: coldestLow !== null && coldestLow <= 0 }
+    return { coldestLow, atRisk: coldestLow === null || coldestLow <= 0 }
 }
