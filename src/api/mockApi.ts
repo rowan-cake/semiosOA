@@ -6,7 +6,7 @@ date: string; // "2027-01-15"
 lowTempC: number | null; // null = station did not report that day
 };
 export const AS_OF_DATE = '2027-01-15'; // treat this as "today"
-export const FAILURE_RATE = 1; // 0 while building, 1 to test errors
+export const FAILURE_RATE = 0; // 0 while building, 1 to test errors
 // Each field's usual daily low (°C): before this week, and during the last 7
 // days
 const FIELDS = [

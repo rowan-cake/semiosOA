@@ -71,3 +71,29 @@ Mistake from mister codex here on designing the look to the weather station view
 Didnt put good axis on the chart also BAD AI
 
 Improved the UI of the weather charts to be more human reading.
+
+
+Now moving onto the Loading, error and empty states, this is locked in and working.
+The user can always retry and toggling the failure rate from 0-1 behaves as it 
+should. 
+
+
+Did completly vibe code part 4 and 5 running out of time 
+    Unit test tested the 0c boundary point before and after it gets added.
+    component integration test:
+        "It uses fake API responses so the tests are fast and predictable. This also lets it deliberately simulate an error.
+
+The file has two tests.
+
+The first checks retrying after an error.
+1. Make the first API request fail.
+2. Display the app and check that an error appears.
+3. Use Tab to reach Try again, then press Enter.
+4. Make the next request succeed.
+5. Check that the frost warning and weather station link appear.
+The second checks choosing a station with the keyboard.
+1. Supply a field with two stations and temperature readings.
+2. Display the field detail screen.
+3. Tab to the second station and press Enter.
+4. Check that the second station is selected and its chart is showing.
+5. Tab again and check that Daily temperatures receives focus."
