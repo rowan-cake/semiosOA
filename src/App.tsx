@@ -62,7 +62,7 @@ function App() {
           {fields.map((field) => (
             <li className="field-row" key={field.id}>
               <div className="field-heading">
-                <h2><a href={`/fields/${field.id}`}>{field.name}</a></h2>
+                <h2>{field.name}</h2>
                 {field.atRisk && <span className="risk-label at-risk">At risk of frost</span>}
               </div>
               <dl className="field-details">
@@ -72,6 +72,10 @@ function App() {
                   <dd>{field.coldestLow === null ? 'No readings' : `${field.coldestLow} °C`}</dd>
                 </div>
               </dl>
+              <a className="station-view-button" href={`/fields/${field.id}`}
+                aria-label={`Weather Station view for ${field.name}`}>
+                Weather Station view
+              </a>
             </li>
           ))}
         </ul>

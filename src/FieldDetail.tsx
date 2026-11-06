@@ -41,21 +41,23 @@ async function loadFieldDetail(fieldId: string): Promise<DetailState> {
 
 // Requires: station.lows contains one value per day in date order.
 // Modifies: nothing
-// Effects: Shows daily lows with a freezing line and gaps for missing values.
+// Effects: Shows daily lows on labeled date and temperature axes, with a
+// freezing line and gaps for missing values.
 // The trend compares the two most recent reported lows.
 function StationChart({ station }: { station: StationDetail }) {
   const reported = station.lows.filter((low) => low !== null)
-  const max = Math.max(1, ...reported)
-  const min = Math.min(-1, ...reported)
+  const tickStep = Math.max(1, Math.ceil(Math.max(...reported.map(Math.abs)) / 2))
+  const max = tickStep * 2
+  const min = -max
+  const ticks = [max, tickStep, 0, -tickStep, min]
   const points = station.lows.map((low, day) => low === null ? null : {
-    x: 40 + day * 40,
-    y: 15 + (max - low) / (max - min) * 100,
+    x: 46 + day * 39,
+    y: 35 + (max - low) / (max - min) * 110,
   })
   const path = points.map((point, day) => point
     ? `${points[day - 1] ? 'L' : 'M'}${point.x},${point.y}`
     : '',
   ).join(' ')
-  const freezingY = 15 + max / (max - min) * 100
   const latest = reported.at(-1)
   const previous = reported.at(-2)
   const trend = latest === undefined || previous === undefined ? 'Trend unavailable'
@@ -66,15 +68,27 @@ function StationChart({ station }: { station: StationDetail }) {
       <h2>{station.label} · Daily low</h2>
       <p>{trend}</p>
       {reported.length === 0 ? <p>No readings in the last 7 days.</p> : (
-        <svg viewBox="0 0 300 145" role="img" aria-label="Seven-day temperature chart with a 0 °C reference line">
-          <line className="freezing-line" x1="40" y1={freezingY} x2="280" y2={freezingY} />
-          <text x="0" y={freezingY + 4}>0 °C</text>
+        <svg viewBox="0 0 300 205" role="img" aria-label={`${station.label} daily low temperatures in Celsius by date. Exact values are available under Daily temperatures.`}>
+          <text x="46" y="18">Temperature (°C)</text>
+          {ticks.map((tick, index) => (
+            <g key={tick}>
+              <line className={tick === 0 ? 'freezing-line' : 'chart-grid'}
+                x1="46" y1={35 + index * 27.5} x2="280" y2={35 + index * 27.5} />
+              <text x="37" y={39 + index * 27.5} textAnchor="end">{tick}</text>
+            </g>
+          ))}
+          <path className="chart-axis" d="M46 35V145H280" />
+          {dates.map((date, day) => (
+            <g key={date}>
+              <line className="chart-axis" x1={46 + day * 39} y1="145" x2={46 + day * 39} y2="150" />
+              {day % 2 === 0 && <text x={46 + day * 39} y="167" textAnchor="middle">{date.slice(5)}</text>}
+            </g>
+          ))}
+          <text x="163" y="193" textAnchor="middle">Date (MM-DD)</text>
           <path className="temperature-line" d={path} />
           {points.map((point, day) => point && (
             <circle key={dates[day]} className="temperature-point" cx={point.x} cy={point.y} r="3" />
           ))}
-          <text x="40" y="138">{dates[0].slice(5)}</text>
-          <text x="280" y="138" textAnchor="end">{AS_OF_DATE.slice(5)}</text>
         </svg>
       )}
       <details>

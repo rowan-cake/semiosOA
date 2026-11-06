@@ -256,7 +256,6 @@
   font: inherit;
 }
 
-.field-heading a,
 .back-to-fields {
   color: inherit;
   text-underline-offset: 0.2em;
@@ -312,7 +311,7 @@
   display: block;
   width: min(100%, 28rem);
   margin-block: 0.5rem;
-  font-size: 12px;
+  font-size: 14px;
   fill: var(--text);
 }
 
@@ -338,4 +337,34 @@
 
 .daily-lows dd {
   margin: 0;
+}
+
+
+.station-view-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  box-sizing: border-box;
+  margin-top: 1rem;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-h);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.station-view-button:hover {
+  border-color: var(--accent);
+}
+
+.chart-axis {
+  fill: none;
+  stroke: var(--text);
+}
+
+.chart-grid {
+  stroke: var(--border);
 }

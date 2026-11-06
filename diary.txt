@@ -70,3 +70,4 @@ Mistake from mister codex here on designing the look to the weather station view
 
 Didnt put good axis on the chart also BAD AI
 
+Improved the UI of the weather charts to be more human reading.
