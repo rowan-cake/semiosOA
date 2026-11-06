@@ -15,3 +15,21 @@ injested by the AI model in a understandable way and there is not misunderstandi
 between the task at hand and the AI model I will be using. 
     - Tool to do this is going to be "https://www.file2markdown.ai/convert/pdf-to-markdown"
     - This is powered by jev and does not store the data anywhere so it is safe. ("Whatever the tier, files are converted in memory and never stored.") so no data leak.
+
+Okay now that project is setup now onto the design phase of what it should look like. The display to the user must ansewr these questions:
+    1. Which fields are at frost risk right now?
+    2. Is it getting colder or warmer in a given field?
+    3. Which stations are the coldest, and are any stations offline (not reporting)? 
+       You don't need to know anything about agriculture to complete this. If a detail 
+       is unclear, make a reasonable assumption and note it in your README.
+
+
+I'm going to start with understanding the mockApi.ts legacy code first, 
+    My first goal is I want to understand how I will be interfacing with the readings , and to do that I need to be able to understand how the data is structerd and what function I could be making calls to (to get the data).
+    - Noticing that we have 3 geters and they are all wraped in the random failures function.
+    - How the fields and stations and readings are built seems like I dont need to know the details and can be abstracted away for the purposes of my visulization.
+    - Conclusion is that the 3 getters is what I will be interfacing with to grab the data. 
+
+Something else occured to me is that most farmers will be looking at this
+dashboard from their mobile device(just through my experience with my father and the videos I've seen through Semios website)
+so I want to create the visulization in way such that mobile experience is respected. 
