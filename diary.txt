@@ -33,3 +33,12 @@ I'm going to start with understanding the mockApi.ts legacy code first,
 Something else occured to me is that most farmers will be looking at this
 dashboard from their mobile device(just through my experience with my father and the videos I've seen through Semios website)
 so I want to create the visulization in way such that mobile experience is respected. 
+
+
+Working on the frostMonitoring function first, wanting to have a simple function checking
+whether a field is at risk of frost or not return boolean.
+
+AI partner was helpful understanding this part, suggested renaming function from 
+`atRiskofFrost`->`fieldAtRiskofFrost` which is better. 
+
+
