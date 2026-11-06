@@ -55,4 +55,18 @@ Okay now that I have the intial frost displaying info I would like to have the c
 of the required data showing all together. I want it to be such that "At risk of frost" is displayed 
 better then how it is right now and under the name of the river flats and everything else just has 
 no error message (not a No frost deteceted peice). Also needs to be mobile friendly so I think cards are the best way
-to stack the required info together.  
+to stack the required info together. 
+
+
+Okay now I want to turn my attenion to the 2nd part which is field detail. Going to have different 
+enpoints once a field is "clicked" on , going to have this be in a seprate file for better 
+modifiability. 
+
+
+Mistake from mister codex here on designing the look to the weather station view:
+    - On the detail screen, stack one card per station. Show its recent daily lows, a simple trend indicator, and an Offline badge when neither of the two most recent days has a reported temperature. Give the screen its own loading, error, and retry states.
+        " That separates the two screens while reusing the same data source. I’d start by getting the field link and station list working, then add the temperatures and trend."
+        "My rebutle = This is okay, but I would prefer to have a more distinguished-looking weather station. So something like a star for each of the weather stations, and organized visually in space, and after you click on one of them, then it shows its temperature reading chart."
+
+Didnt put good axis on the chart also BAD AI
+

@@ -255,3 +255,87 @@
   padding: 0.5rem 0.75rem;
   font: inherit;
 }
+
+.field-heading a,
+.back-to-fields {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+.back-to-fields {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.station-heading {
+  margin-top: 1.25rem;
+}
+
+.station-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.station-grid button {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  min-height: 4.75rem;
+  margin: 0;
+  color: var(--text-h);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.station-grid button[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  font-weight: 600;
+}
+
+.station-star {
+  color: var(--accent);
+  font-size: 1.25rem;
+}
+
+.station-chart {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+}
+
+.station-chart svg {
+  display: block;
+  width: min(100%, 28rem);
+  margin-block: 0.5rem;
+  font-size: 12px;
+  fill: var(--text);
+}
+
+.freezing-line {
+  stroke: var(--text);
+  stroke-dasharray: 4 4;
+}
+
+.temperature-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.temperature-point {
+  fill: var(--accent);
+}
+
+.daily-lows div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.daily-lows dd {
+  margin: 0;
+}
