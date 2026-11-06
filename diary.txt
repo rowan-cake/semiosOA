@@ -1,0 +1,17 @@
+First thought is that I need to get this up and running, I need a simple 
+package manager to keep all my tests together and tie together frontend and backend
+I will chose npm and also use the sugested vite for building frontend. 
+
+```
+npm create vite@latest my-app -- --template react-ts
+cd my-app
+npm install
+npm run dev
+```
+
+Next thought I had after the project is built with no integration yet is 
+that I want the entire PDF document to be parsed clealy so that it can be 
+injested by the AI model in a understandable way and there is not misunderstanding
+between the task at hand and the AI model I will be using. 
+    - Tool to do this is going to be "https://www.file2markdown.ai/convert/pdf-to-markdown"
+    - This is powered by jev and does not store the data anywhere so it is safe. ("Whatever the tier, files are converted in memory and never stored.") so no data leak.
