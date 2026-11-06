@@ -182,3 +182,52 @@
     border-right-color: var(--border);
   }
 }
+
+.frost-monitor {
+  width: min(100%, 42rem);
+  box-sizing: border-box;
+  margin-inline: auto;
+  padding: 1.5rem 1rem;
+  text-align: left;
+}
+
+.frost-monitor h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+}
+
+.field-list {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+}
+
+.field-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--border);
+  color: var(--text-h);
+}
+
+.risk-label {
+  padding: 0.125rem 0.625rem;
+  border-radius: 1rem;
+  background: var(--code-bg);
+  font-size: 0.875rem;
+}
+
+.risk-label.at-risk {
+  background: #ffe4e6;
+  color: #881337;
+}
+
+.frost-monitor button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+}

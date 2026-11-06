@@ -42,3 +42,11 @@ AI partner was helpful understanding this part, suggested renaming function from
 `atRiskofFrost`->`fieldAtRiskofFrost` which is better. 
 
 
+- Now I want to add a small simple visual component to this. visulization of the fields names and 
+wherether they are at risk or not using the new simple function `fieldAtRiskofFrost`.
+
+Had help from codex here and also learned this new function "useState remembers values between renders. In App.tsx, fields starts as null, so the screen shows “Loading fields…”. When the data arrives, setFields(statuses) saves the results and tells React to render again. This time, fields contains the list, so React displays the rows.
+
+useEffect runs code after React renders. In your app, it starts the API requests when the screen first appears. The [attempt] at the end tells React to run the effect again when attempt changes. Clicking Try again increments attempt, which triggers a fresh fetch.
+
+So the flow is render “Loading…” → fetch in useEffect → save with setFields → render the field list."
